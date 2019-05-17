@@ -13,11 +13,13 @@
   box-sizing: border-box;
 }
 
+
 .mdc-drawer-app-content {
   flex: auto;
   overflow: auto;
   position: relative;
 }
+
 .mdc-top-app-bar{
   position: absolute;
   background-color: $mdc-theme-on-primary;
@@ -32,6 +34,9 @@
   text-align: center;
 }
 
+.logo {
+  //src: url(../assets/logo.png) ;
+}
 .logo-div {
   bottom: 0;
   padding: 10%;

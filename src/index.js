@@ -10,8 +10,13 @@ drawer.open = true;
 
 const topAppBarElement = document.querySelector('.mdc-top-app-bar');
 const topAppBar = new MDCTopAppBar(topAppBarElement);
-topAppBar.listen('MDCTopAppBar:nav', manageTopBarNav);
 
-function manageTopBarNav() {
+const appContent = document.querySelector('.AppContent');
+
+topAppBar.listen('MDCTopAppBar:nav', () => {
     drawer.open = !drawer.open;
-}
+});
+
+list.listen('click', () => {
+    appContent.innerHTML = list.selectedIndex.toString();
+});
