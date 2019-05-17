@@ -1,21 +1,9 @@
-@import "variables";
+@import "common";
 @import "@material/drawer/mdc-drawer";
 @import "@material/list/mdc-list";
 @import "@material/top-app-bar/mdc-top-app-bar";
 @import "@material/drawer/mdc-drawer";
-
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  display: flex;
-  height: 100vh;
-}
+@import "@material/elevation/mdc-elevation";
 
 .main-content {
   overflow: auto;
@@ -30,7 +18,21 @@ body {
   overflow: auto;
   position: relative;
 }
-.mdc-top-app-bar .mdc-top-app-bar__nagivation-icon {
+.mdc-top-app-bar{
   position: absolute;
   background-color: $mdc-theme-on-primary;
+}
+.mdc-top-app-bar__navigation-icon {
+  background: $mdc-theme-primary;
+  border-radius: 20%;
+}
+
+.logo-subtitle {
+  width: 100%;
+  text-align: center;
+}
+
+.logo-div {
+  bottom: 0;
+  padding: 10%;
 }

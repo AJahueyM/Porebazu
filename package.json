@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@material/drawer": "^2.1.1",
+    "@material/elevation": "^1.1.0",
     "@material/top-app-bar": "^2.1.1",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"

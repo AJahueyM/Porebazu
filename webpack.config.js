@@ -40,5 +40,5 @@ module.exports = [
                 use: getStyleUse('bundle-index.css')
             }]
         },
-    },
+    }
 ];
