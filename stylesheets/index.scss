@@ -1,7 +1,9 @@
+@import "variables";
 @import "@material/drawer/mdc-drawer";
 @import "@material/list/mdc-list";
 @import "@material/top-app-bar/mdc-top-app-bar";
 @import "@material/drawer/mdc-drawer";
+
 
 html, body {
   margin: 0;
@@ -28,6 +30,7 @@ body {
   overflow: auto;
   position: relative;
 }
-.mdc-top-app-bar {
+.mdc-top-app-bar .mdc-top-app-bar__nagivation-icon {
   position: absolute;
+  background-color: $mdc-theme-on-primary;
 }
