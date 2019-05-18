@@ -35,7 +35,8 @@ module.exports = [
                     loader: 'babel-loader',
                 }
             ]
-        }
+        },
+        target: "node",
     },
     {
         entry: './stylesheets/index.scss',

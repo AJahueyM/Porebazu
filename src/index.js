@@ -22,13 +22,13 @@ const transitionsBottom = document.querySelectorAll('.bottom-to-top-animation');
 
 transitionsTop[0].addEventListener("animationstart", (event) => {
     setTimeout(() => {
-        navigationListener.callback(list.selectedIndex);
+        navigationListener.notify(list.selectedIndex);
     }, 200);
 });
 
 transitionsBottom[0].addEventListener("animationstart", (event) => {
     setTimeout(() => {
-        navigationListener.callback(list.selectedIndex);
+        navigationListener.notify(list.selectedIndex);
     }, 400);});
 
 list.listen('click', () => {

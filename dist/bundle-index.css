@@ -1653,17 +1653,17 @@ a.mdc-list-item {
 
 @keyframes topToBottomAnimation {
   from {
-    top: -100%;
+    top: -150%;
   }
   to {
-    top: 100%;
+    top: 150%;
   }
 }
 .top-to-bottom-animation {
   position: absolute;
   width: 100%;
-  height: 100%;
-  top: -100%;
+  height: 150%;
+  top: -150%;
   left: 0;
   bottom: auto;
   right: auto;
@@ -1678,17 +1678,17 @@ a.mdc-list-item {
 
 @keyframes bottomToTopAnimation {
   from {
-    top: 100%;
+    top: 150%;
   }
   to {
-    top: -100%;
+    top: -150%;
   }
 }
 .bottom-to-top-animation {
   position: absolute;
   width: 100%;
-  height: 100%;
-  top: 100%;
+  height: 150%;
+  top: 150%;
   left: 0;
   bottom: auto;
   right: auto;
@@ -1739,4 +1739,8 @@ a.mdc-list-item {
 .logo-div {
   bottom: 0;
   padding: 10%;
+}
+
+.content-title {
+  text-align: center;
 }

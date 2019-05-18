@@ -1,35 +1,63 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Home} from './index-content/home.jsx'
+import {Guides} from './index-content/guides.jsx'
+import {Resources} from './index-content/resources.jsx'
 
 export let navigationListener = {};
-navigationListener.callback = null;
+navigationListener.notify = null;
 
-class TicTacToe extends React.Component {
+const ContentState = {
+    HOME: 0,
+    GUIDES: 1,
+    RESOURCES: 2
+};
+
+class ContentManager extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          text: 'Hello',
+          currentContent: ContentState.HOME,
         };
     }
     componentDidMount() {
-        navigationListener.callback = (data) => {
-          this.setState({text: data});
+        navigationListener.notify = (data) => {
+          this.setState({currentContent: data});
         };
     }
 
     render() {
-        return (
-            <h1>
-                {this.state.text}
-            </h1>
-        );
+        switch (this.state.currentContent) {
+            case ContentState.HOME:{
+                return (
+                    <Home/>
+                );
+            }
+            case ContentState.GUIDES: {
+                return (
+                    <Guides/>
+                );
+            }
+            case ContentState.RESOURCES: {
+                return (
+                    <Resources/>
+                );
+            }
+            default: {
+                return (
+                    <h1>
+                        Not implemented yet
+                    </h1>
+                );
+            }
+        }
     }
 }
 
 // ========================================
 
-const ticTacToe = ReactDOM.render(
-    <TicTacToe />,
+ReactDOM.render(
+    <ContentManager />,
     document.getElementById('root')
 );
 
