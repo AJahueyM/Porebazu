@@ -36,6 +36,7 @@
     "@material/top-app-bar": "^2.1.1",
     "image-webpack-loader": "^4.6.0",
     "img-loader": "^3.0.1",
+    "react": "^16.8.6",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
   }

@@ -8,6 +8,7 @@ body {
   margin: 0;
   padding-top: 0.1px;
   background-image: url(1b36eb843bc0afdf756d6d66baa78a2c.jpg);
+  overflow: hidden;
 }
 
 .mdc-drawer {
@@ -1682,4 +1683,54 @@ a.mdc-list-item {
 .logo-div {
   bottom: 0;
   padding: 10%;
+}
+
+@keyframes topToBottomAnimation {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 100%;
+  }
+}
+.top-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -100%;
+  left: 0;
+  bottom: auto;
+  right: auto;
+  background: #c42500;
+  animation: topToBottomAnimation 1s cubic-bezier(0.6, 0.05, 0.4, 1);
+}
+
+.top-layer-1 {
+  background: #303030;
+  animation-delay: 0.05s;
+}
+
+@keyframes bottomToTopAnimation {
+  from {
+    top: 100%;
+  }
+  to {
+    top: -100%;
+  }
+}
+.bottom-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 100%;
+  left: 0;
+  bottom: auto;
+  right: auto;
+  background: #c42500;
+  animation: bottomToTopAnimation 1s cubic-bezier(0.6, 0.05, 0.4, 1);
+}
+
+.bottom-layer-1 {
+  background: #303030;
+  animation-delay: 0.05s;
 }
