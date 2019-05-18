@@ -1744,3 +1744,14 @@ a.mdc-list-item {
 .content-title {
   text-align: center;
 }
+
+.resource-list-element {
+  background-color: rgba(100, 100, 100, 0.2);
+}
+
+.resources-list {
+  padding-left: 0;
+  padding-right: 0;
+  display: table;
+  margin: 0 auto;
+}
