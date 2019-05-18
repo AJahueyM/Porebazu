@@ -1,0 +1,53 @@
+@import "./variables";
+
+@keyframes topToBottomAnimation {
+  from {
+    top : -100%;
+  }
+  to {
+    top : 100%;
+  }
+}
+
+.top-to-bottom-animation{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -100%;
+  left: 0;
+  bottom: auto;
+  right: auto;
+  background: $mdc-theme-primary;
+  animation: topToBottomAnimation 0.7s ease-out;
+}
+
+.top-to-bottom-animation-1 {
+  background: $mdc-theme-on-primary;
+  animation-delay: 0.05s;
+}
+
+@keyframes bottomToTopAnimation {
+  from {
+    top : 100%;
+  }
+  to {
+    top : -100%;
+  }
+}
+
+.bottom-to-top-animation{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 100%;
+  left: 0;
+  bottom: auto;
+  right: auto;
+  background: $mdc-theme-primary;
+  animation: bottomToTopAnimation 0.7s ease-out;
+}
+
+.bottom-to-top-animation-1 {
+  background: $mdc-theme-on-primary;
+  animation-delay: 0.05s;
+}
