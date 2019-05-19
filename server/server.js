@@ -23,6 +23,5 @@ app.listen(PORT, () => {
 let rscManager = new resourceManager.ResourceManager();
 app.post('/get-resources', (req, res) => {
     let resources = rscManager.currentResources();
-    console.log(JSON.stringify(resources));
     res.end(JSON.stringify(resources));
 });

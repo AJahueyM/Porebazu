@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 function renderSingleItem(props) {
     return (
         <li className="resource-list-element" key={props.key}>
-            <a href={props.resource.url}>
+            <a href={props.resource.url} target="_blank">
                 {props.resource.name}
             </a>
         </li>
