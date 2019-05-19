@@ -23,7 +23,7 @@ export class Resources extends React.Component {
     _requestResourceUpdate(){
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.open("POST", "get-resources", true);
-        xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xmlHttp.setRequestHeader('Content-type', 'application/json');
         xmlHttp.onreadystatechange = () => {
             if(xmlHttp.readyState === 4 && xmlHttp.status === 200){
                 this._onResourcesReceived(xmlHttp.responseText);
