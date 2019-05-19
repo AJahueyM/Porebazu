@@ -1,4 +1,7 @@
+'use strict';
+
 const path = require('path');
+const webpack = require('webpack');
 
 function getStyleUse(bundleFilename) {
     return [
@@ -25,6 +28,7 @@ module.exports = [
     {
         entry: "./src/index.js",
         output: {
+            library: 'ReactMarkdown',
             filename: "bundle-index.js"
         },
         module: {
@@ -35,8 +39,7 @@ module.exports = [
                     loader: 'babel-loader',
                 }
             ]
-        },
-        target: "node",
+        }
     },
     {
         entry: './stylesheets/index.scss',

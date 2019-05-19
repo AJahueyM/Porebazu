@@ -2,6 +2,10 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const resourceManager = require('./actions/get-resources');
+const guidesManager = require('./actions/get-guides');
+
+let rscManager = new resourceManager.ResourceManager();
+let gdsManager = new guidesManager.GuidesManager();
 
 const app = express(),
     DIST_DIR =  path.join(__dirname, '../dist/'),
@@ -20,8 +24,12 @@ app.listen(PORT, () => {
     console.log('Press Ctrl+C to quit.');
 });
 
-let rscManager = new resourceManager.ResourceManager();
 app.post('/get-resources', (req, res) => {
-    let resources = rscManager.currentResources();
+    let resources = rscManager.getCurrentResources();
     res.end(JSON.stringify(resources));
+});
+
+app.post('/get-guide', (req, res) => {
+    let guides = gdsManager.getCurrentGuides();
+    res.end(JSON.stringify(guides));
 });

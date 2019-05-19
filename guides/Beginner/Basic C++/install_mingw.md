@@ -1,0 +1,2 @@
+# Instalar MinGW
+nsdañoasmlfmdsf

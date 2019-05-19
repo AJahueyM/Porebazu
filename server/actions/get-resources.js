@@ -3,7 +3,7 @@ const fs = require('fs');
 
 exports.ResourceManager= class ResourceManager {
     constructor() {
-        this.currentFiles = [];
+        this.currentResources = [];
         this.watcher = chokidar.watch('resources/*.json', {
             ignored: /(^|[\/\\])\../,
             persistent: true,
@@ -24,7 +24,7 @@ exports.ResourceManager= class ResourceManager {
         return (resource.name !== undefined && resource.url !== undefined);
     }
     _sortResources(){
-        this.currentFiles.sort((a, b) =>{
+        this.currentResources.sort((a, b) =>{
             return a.name.localeCompare(b.name);
         });
     }
@@ -36,10 +36,11 @@ exports.ResourceManager= class ResourceManager {
             newResource = JSON.parse(data);
             }catch (e) {
                 console.log(e);
+                console.log(path, " Failed to load");
                 return;
             }
             let index = -1;
-                this.currentFiles.find((item, i) => {
+                this.currentResources.find((item, i) => {
                     if(item.filePath === path){
                         index = i;
                         return true;
@@ -52,9 +53,9 @@ exports.ResourceManager= class ResourceManager {
                 newResource.filePath = path;
 
                 if( index !== -1){
-                    this.currentFiles[index] = newResource;
+                    this.currentResources[index] = newResource;
                 }else{
-                    this.currentFiles.push(newResource);
+                    this.currentResources.push(newResource);
                 }
                 this._sortResources();
 
@@ -62,7 +63,7 @@ exports.ResourceManager= class ResourceManager {
                 console.error(path, " not a valid resource");
                 if(index !== -1){
                     console.error(path, " removed as it is no longer a valid resource");
-                    this.currentFiles.splice(index, 1);
+                    this.currentResources.splice(index, 1);
                 }
             }
         });
@@ -76,12 +77,13 @@ exports.ResourceManager= class ResourceManager {
                     newResource = JSON.parse(data);
                 }catch (e) {
                     console.log(e);
+                    console.log(path, " Failed to load");
                     return;
                 }
                 if(ResourceManager._checkresource(newResource)){
                     console.log("Successfully parsed ", path, " as JSON");
                     newResource.filePath = path;
-                    this.currentFiles.push(newResource);
+                    this.currentResources.push(newResource);
                     this._sortResources();
                 }else{
                     console.error(path, " not a valid resource");
@@ -93,14 +95,14 @@ exports.ResourceManager= class ResourceManager {
     }
     _updateResourcesRemoved (data) {
         console.log("Removed ", data);
-        this.currentFiles = this.currentFiles.filter((value, index, arr) => {
+        this.currentResources = this.currentResources.filter((value, index, arr) => {
             return value.filePath !== data;
         });
         this._sortResources();
 
     }
-    currentResources(){
-        return this.currentFiles;
+    getCurrentResources(){
+        return this.currentResources;
     }
 };
 

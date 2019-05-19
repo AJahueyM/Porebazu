@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+class SingleResource extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render() {
+        return (
+            <li className="resource-list-element">
+                <a href={this.props.resource.url} target="_blank">
+                    {this.props.resource.name}
+                </a>
+            </li>
+        );
+    }
+}
+
 function renderSingleItem(props) {
     return (
-        <li className="resource-list-element" key={props.key}>
-            <a href={props.resource.url} target="_blank">
-                {props.resource.name}
-            </a>
-        </li>
+        <SingleResource resource={props.resource} key={props.key}  />
     );
 }
 
