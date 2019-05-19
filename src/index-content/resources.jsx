@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 
 function renderSingleItem(props) {
     return (
-        <l1 className="resource-list-element" key={props.key}>
-            {props.name}
-        </l1>
+        <li className="resource-list-element" key={props.key}>
+            <a href={props.resource.url}>
+                {props.resource.name}
+            </a>
+        </li>
     );
 }
+
 export class Resources extends React.Component {
     constructor(props){
         super(props);
@@ -23,17 +26,16 @@ export class Resources extends React.Component {
         xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xmlHttp.onreadystatechange = () => {
             if(xmlHttp.readyState === 4 && xmlHttp.status === 200){
-                this._onResourcesNameReceived(xmlHttp.responseText);
+                this._onResourcesReceived(xmlHttp.responseText);
             }
         };
         xmlHttp.send(null);
     }
-    _onResourcesNameReceived(data) {
-        let receivedResourcesName = data.split(',');
-        receivedResourcesName.pop();
-
-        this.setState({currentResources: receivedResourcesName})
+    _onResourcesReceived(data) {
+        let resources = JSON.parse(data);
+        this.setState({currentResources: resources})
     }
+
     render() {
         return (
             <div>
@@ -42,7 +44,7 @@ export class Resources extends React.Component {
                 </h1>
                 <ul className="resources-list">
                     {
-                        this.state.currentResources.map((resourceName) => renderSingleItem({name: resourceName, key: resourceName + '-list-key'}))
+                        this.state.currentResources.map((resource, i) => renderSingleItem({resource: resource, key: resource.name + '-list-key-' + i}))
                     }
                 </ul>
             </div>

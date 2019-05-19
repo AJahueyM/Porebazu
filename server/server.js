@@ -19,13 +19,10 @@ app.listen(PORT, () => {
     console.log(`App listening to ${PORT}....`);
     console.log('Press Ctrl+C to quit.');
 });
+
 let rscManager = new resourceManager.ResourceManager();
-
 app.post('/get-resources', (req, res) => {
-
-    let response = '';
-    rscManager.currentResources().forEach(item => {
-        response += item + ',';
-    });
-    res.end(response);
+    let resources = rscManager.currentResources();
+    console.log(JSON.stringify(resources));
+    res.end(JSON.stringify(resources));
 });

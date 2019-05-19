@@ -19,8 +19,17 @@ exports.ResourceManager= class ResourceManager {
         });
     }
     _updateResources () {
+        let fileNames = [];
         fs.readdir('resources/', (err, files) => {
-            this.currentFiles = files;
+            fileNames = files;
+            let readFiles = [];
+            fileNames.forEach(item => {
+                fs.readFile('resources/' + item, 'utf8',(err, data) => {
+                    let currentFile = JSON.parse(data);
+                    readFiles.push(currentFile);
+                    this.currentFiles = readFiles;
+                });
+            });
         });
     }
     currentResources(){
