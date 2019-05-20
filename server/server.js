@@ -13,6 +13,7 @@ const app = express(),
 
 app.use(express.static(DIST_DIR));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({extended: true}));
 
 app.get('/', (req, res) => {
     res.sendFile(HTML_FILE);
@@ -29,7 +30,18 @@ app.post('/get-resources', (req, res) => {
     res.end(JSON.stringify(resources));
 });
 
-app.post('/get-guide', (req, res) => {
-    let guides = gdsManager.getCurrentGuides();
-    res.end(JSON.stringify(guides));
+app.post('/get-guides', (req, res) => {
+    if(req.body.request === 'get_names'){
+        res.end(JSON.stringify(gdsManager.getCurrentGuidesNames()));
+    }else if(req.body.request === 'get_descriptors'){
+        res.end(JSON.stringify(gdsManager.getCurrentGuidesDescriptors()));
+    }else if(req.body.request === 'get_guide'){
+        if(req.body.guide_name !== undefined){
+            res.end(JSON.stringify(gdsManager.getGuide(res.body.guide_name)));
+        }else{
+            res.end(JSON.stringify(undefined));
+        }
+    }else{
+        res.end(JSON.stringify(undefined));
+    }
 });

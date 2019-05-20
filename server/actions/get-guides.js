@@ -1,69 +1,44 @@
-const chokidar = require('chokidar');
-const fs = require('fs');
+const fileNotifier = require('../common/file-notifier');
 const path_module = require('path');
 
-exports.GuidesManager= class GuidesManager {
+exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
     constructor() {
-        this.currentGuides = [];
-        this.currentGuidesDescriptors = [];
-        this.watcher = chokidar.watch('guides/**/*.md', {
-            ignored: /(^|[\/\\])\../,
-            persistent: true,
-            awaitWriteFinish: true
-        });
-
-        this.watcher.on('add', path =>{
-            this._updateGuideAdded(path);
-        });
-        this.watcher.on('unlink', path =>{
-            this._updateGuideRemoved(path);
-        });
-        this.watcher.on('change', path =>{
-            this._updateGuideChanged(path);
-        });
+        super('guides/*/*/*.md', (data, path) => GuidesManager.parseGuide(data, path));
     }
-    _updateGuideChanged(path){
-        let index = 0;
-        this.currentGuides.find((item, i) => {
-            if(item.filePath === path){
-                index = i;
-                return true;
-            }
-            return false;
-        });
+    static parseGuide(data, path){
+        let guide =  {};
+        guide.md = data;
+        guide.name = path_module.basename(path);
 
-        if(index === -1){
-            return;
-        }
-
-        fs.readFile(path, 'utf8' ,(err, data) => {
-            this.currentGuides[index].md = data;
-        });
-    }
-    _updateGuideAdded (path) {
-        let index = this.currentGuides.indexOf((item) => {
-            return item.filePath === path;
-        });
-        if(index > -1){
-            return;
-        }
-
-        fs.readFile(path, 'utf8' ,(err, data) => {
-            let newGuide = {};
-            newGuide.md = data;
-            newGuide.filePath = path;
-            newGuide.name = path_module.basename(path);
-            this.currentGuides.push(newGuide);
-        });
-
-    }
-    _updateGuideRemoved (data) {
-        this.currentGuides = this.currentGuides.filter((value) => {
-            return value.filePath !== data;
-        });
+        let pathBreakup = path.split('/');
+        guide.level = pathBreakup[1];
+        guide.group = pathBreakup[2];
+        return guide;
     }
     getCurrentGuides(){
-        return this.currentGuides;
+        return this._getParsedFiles();
+    }
+    getGuide(name){
+        return this.getCurrentGuides().find((item) => {
+           return item.name === name;
+        });
+    }
+    getCurrentGuidesNames() {
+        let guidesNames = [];
+        this._getParsedFiles().forEach((item) => {
+        guidesNames.push(item.name);
+        });
+        return guidesNames;
+    }
+    getCurrentGuidesDescriptors() {
+        let guidesDescriptors = [];
+        this._getParsedFiles().forEach((item) => {
+            let descriptor = {};
+            descriptor.name = item.name;
+            descriptor.level = item.level;
+            descriptor.group = item.group;
+            guidesDescriptors.push(descriptor);
+        });
+        return guidesDescriptors;
     }
 };
-

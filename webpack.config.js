@@ -2,7 +2,10 @@
 
 const path = require('path');
 const webpack = require('webpack');
-
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+const liveReloadConfig = {
+    protocol: 'http'
+};
 function getStyleUse(bundleFilename) {
     return [
         {
@@ -39,7 +42,10 @@ module.exports = [
                     loader: 'babel-loader',
                 }
             ]
-        }
+        },
+        plugins: [
+            new LiveReloadPlugin(liveReloadConfig)
+        ]
     },
     {
         entry: './stylesheets/index.scss',
@@ -66,5 +72,8 @@ module.exports = [
                 ]
             }]
         },
+        plugins: [
+            new LiveReloadPlugin(liveReloadConfig)
+        ]
     }
 ];

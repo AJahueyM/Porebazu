@@ -1755,3 +1755,33 @@ a.mdc-list-item {
   display: table;
   margin: 0 auto;
 }
+
+.guide-list {
+  display: table;
+  margin: 0 auto;
+  align-content: center;
+}
+
+.guide-descriptor {
+  background-color: rgba(50, 50, 50, 0.1);
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+}
+
+.guide-descriptor-info {
+  display: inline;
+}
+
+.guide-descriptor-name {
+  padding: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.guide-descriptor-level,
+.guide-descriptor-group {
+  bottom: 0;
+  top: 0;
+  padding-right: 1%;
+}

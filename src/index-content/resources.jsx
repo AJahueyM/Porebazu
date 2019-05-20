@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {makeHTTPRequestJSON} from '../common/html-request-handler.js';
 
 class SingleResource extends React.Component {
     constructor(props){
@@ -29,21 +30,13 @@ export class Resources extends React.Component {
           currentResources: []
         }
         ;
-        this._requestResourceUpdate();
+        makeHTTPRequestJSON({method: 'POST', url: 'get-resources'}, (response) => this._onResourcesReceived(response) );
     }
-    _requestResourceUpdate(){
-        let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", "get-resources", true);
-        xmlHttp.setRequestHeader('Content-type', 'application/json');
-        xmlHttp.onreadystatechange = () => {
-            if(xmlHttp.readyState === 4 && xmlHttp.status === 200){
-                this._onResourcesReceived(xmlHttp.responseText);
-            }
-        };
-        xmlHttp.send(null);
-    }
-    _onResourcesReceived(data) {
-        let resources = JSON.parse(data);
+    _onResourcesReceived(response) {
+        if(response === undefined){
+            return;
+        }
+        let resources = JSON.parse(response);
         this.setState({currentResources: resources})
     }
 
