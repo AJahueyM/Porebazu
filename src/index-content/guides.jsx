@@ -7,7 +7,7 @@ export class Guides extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            guidesDescriptors: []
+            guidesTree: []
         };
     }
     componentDidMount() {
@@ -17,14 +17,9 @@ export class Guides extends React.Component {
         if(response === undefined){
             return;
         }
-        let guidesDescriptors = JSON.parse(response);
-        this.setState({guidesDescriptors: guidesDescriptors});
+        this.setState({guidesTree: JSON.parse(response)});
     }
-    static renderGuideDescriptor(props) {
-        return (
-            <GuideDescriptor descriptor={props.descriptor}  key={props.key} />
-        );
-    }
+
     render() {
         return (
             <div>
@@ -32,11 +27,15 @@ export class Guides extends React.Component {
                     Guías
                 </h1>
                 <ul className='guides-list'>
-                    {this.state.guidesDescriptors.map((descriptor, index) => Guides.renderGuideDescriptor({descriptor: descriptor, key: descriptor.name + "-key-id-" + index}))}
+                    <h3>
+                        {this.state.guidesTree.map((level) => this.renderLevelGuideIndex(level))}
+                    </h3>
+                    {}
                 </ul>
             </div>
         );
     }
+
 }
 
 class GuideDescriptor extends React.Component {
@@ -52,14 +51,6 @@ class GuideDescriptor extends React.Component {
                 <h3 className='guide-descriptor-name'>
                     {this.state.descriptor.name}
                 </h3>
-                <div className='guide-descriptor-info'>
-                    <p className='guide-descriptor-level'>
-                        {this.state.descriptor.level}
-                    </p>
-                    <p className='guide-descriptor-group'>
-                        {this.state.descriptor.group}
-                    </p>
-                </div>
             </div>
         );
     }

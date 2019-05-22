@@ -2,7 +2,7 @@ const chokidar = require('chokidar');
 const fs = require('fs');
 
 exports.FileNotifier = class FileNotifier {
-    constructor(path = '.', parseFile = (data, path)=>{}){
+    constructor(path = '.', parseFile = (data, path)=>{}, onFileEvent = (change) => {}){
         this.currentFiles = [];
         this.parseFile = parseFile;
         this.watcher = chokidar.watch( path, {
@@ -13,12 +13,15 @@ exports.FileNotifier = class FileNotifier {
 
         this.watcher.on('add', path =>{
             this._updateFileAdded(path);
+            onFileEvent('add');
         });
         this.watcher.on('unlink', path =>{
             this._updateFileRemoved(path);
+            onFileEvent('unlink');
         });
         this.watcher.on('change', path =>{
             this._updateFileChanged(path);
+            onFileEvent('change');
         });
     }
     _updateFileChanged(path){
