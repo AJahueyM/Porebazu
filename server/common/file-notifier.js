@@ -5,6 +5,7 @@ exports.FileNotifier = class FileNotifier {
     constructor(path = '.', parseFile = (data, path)=>{}, onFileEvent = (change) => {}){
         this.currentFiles = [];
         this.parseFile = parseFile;
+        this.onFileEvent = onFileEvent;
         this.watcher = chokidar.watch( path, {
             ignored: /(^|[\/\\])\../,
             persistent: true,
@@ -13,15 +14,12 @@ exports.FileNotifier = class FileNotifier {
 
         this.watcher.on('add', path =>{
             this._updateFileAdded(path);
-            onFileEvent('add');
         });
         this.watcher.on('unlink', path =>{
             this._updateFileRemoved(path);
-            onFileEvent('unlink');
         });
         this.watcher.on('change', path =>{
             this._updateFileChanged(path);
-            onFileEvent('change');
         });
     }
     _updateFileChanged(path){
@@ -40,6 +38,7 @@ exports.FileNotifier = class FileNotifier {
 
         fs.readFile(path, 'utf8' ,(err, data) => {
             this.currentFiles[index].parsed = this.parseFile(data, path);
+            this.onFileEvent('change');
         });
     }
     _updateFileAdded (path) {
@@ -55,12 +54,14 @@ exports.FileNotifier = class FileNotifier {
             newFile.parsed =  this.parseFile(data, path);
             newFile.filePath = path;
             this.currentFiles.push(newFile);
+            this.onFileEvent('add');
         });
     }
     _updateFileRemoved (data) {
         this.currentFiles = this.currentFiles.filter((value) => {
             return value.filePath !== data;
         });
+        this.onFileEvent('unlink');
     }
     _getFiles(){
         return this.currentFiles;

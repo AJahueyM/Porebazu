@@ -30,7 +30,7 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
     getCurrentGuidesNames() {
         let guidesNames = [];
         this._getParsedFiles().forEach((item) => {
-        guidesNames.push(item.name);
+            guidesNames.push(item.name);
         });
         return guidesNames;
     }
@@ -46,13 +46,13 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
         return guidesDescriptors;
     }
     onGuidesUpdated() {
-       let currentGuides =  this.getCurrentGuidesDescriptors();
+       let currentGuides =  this.getCurrentGuidesDescriptors().slice();
        let newGuideTree = [];
        currentGuides.forEach((item) => {
            let levelIndex = newGuideTree.findIndex((value) => {
-              return value.level === item.level;
+                return value.name === item.level;
            });
-    
+
             if(levelIndex === -1){
                 let newLevel = {};
                 newLevel.name = item.level;
@@ -65,16 +65,17 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
                 return group.name === item.group;
             });
 
-            if(groupIndex === 1){
+            if(groupIndex === -1){
                 let newGroup = {};
                 newGroup.name = item.name;
                 newGroup.guides = [];
                 newGuideTree[levelIndex].groups.push(newGroup);
                 groupIndex = newGuideTree[levelIndex].groups.length - 1;
             }
-            newGuideTree[levelIndex].groups[groupIndex].push(item);
+            newGuideTree[levelIndex].groups[groupIndex].guides.push(item);
        });
-        console.log(newGuideTree);
+       console.log('--------------------');
+       console.log(newGuideTree);
        this.guideTree = newGuideTree;
     }
     getGuideTree(){

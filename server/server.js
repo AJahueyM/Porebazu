@@ -33,8 +33,8 @@ app.post('/get-resources', (req, res) => {
 app.post('/get-guides', (req, res) => {
     if(req.body.request === 'get_names'){
         res.end(JSON.stringify(gdsManager.getCurrentGuidesNames()));
-    }else if(req.body.request === 'get_descriptors'){
-        res.end(JSON.stringify(gdsManager.getCurrentGuidesDescriptors()));
+    }else if(req.body.request === 'get_tree'){
+        res.end(JSON.stringify(gdsManager.getGuideTree()));
     }else if(req.body.request === 'get_guide'){
         if(req.body.guide_name !== undefined){
             res.end(JSON.stringify(gdsManager.getGuide(res.body.guide_name)));
