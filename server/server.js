@@ -36,8 +36,9 @@ app.post('/get-guides', (req, res) => {
     }else if(req.body.request === 'get_tree'){
         res.end(JSON.stringify(gdsManager.getGuideTree()));
     }else if(req.body.request === 'get_guide'){
+        let validGuideRequest = (req.body.guide_level !== undefined && req.body.guide_group !== undefined) && req.body.guide_name !== undefined;
         if(req.body.guide_name !== undefined){
-            res.end(JSON.stringify(gdsManager.getGuide(res.body.guide_name)));
+            res.end(JSON.stringify(gdsManager.getGuide(req.body.guide_level, req.body.guide_group, req.body.guide_name)));
         }else{
             res.end(JSON.stringify(undefined));
         }

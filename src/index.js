@@ -17,38 +17,34 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
 });
 
 let lastNavListIndex = 0;
-const transitionsTop = document.querySelectorAll('.top-to-bottom-animation');
-const transitionsBottom = document.querySelectorAll('.bottom-to-top-animation');
 
-transitionsTop[0].addEventListener("animationstart", (event) => {
-    setTimeout(() => {
-        navigationListener.notify(list.selectedIndex);
-    }, 200);
-});
+let url = window.location.hash, idx = url.indexOf("#");
+let hash = idx !== -1 ? url.substring(idx+1) : "";
+console.log(hash);
 
-transitionsBottom[0].addEventListener("animationstart", (event) => {
-    setTimeout(() => {
-        navigationListener.notify(list.selectedIndex);
-    }, 400);});
-
+switch (hash) {
+    case 'Guides':
+    {
+        navigationListener.notify(1);
+        list.selectedIndex = 1;
+        break;
+    }
+    case 'Resources':
+    {
+        navigationListener.notify(2);
+        list.selectedIndex = 2;
+        break;
+    }
+    default:
+    {
+        break;
+    }
+}
 list.listen('click', () => {
     let movementList = list.selectedIndex - lastNavListIndex;
     if(movementList === 0){
         return;
     }
-    if(movementList > 0){
-        for(const transitionTop of transitionsTop){
-            transitionTop.classList.remove('top-to-bottom-animation');
-            void transitionTop.offsetHeight;
-            transitionTop.classList.add('top-to-bottom-animation');
-        }
-    }else if(movementList < 0){
-        for(const transitionBottom of transitionsBottom){
-            transitionBottom.classList.remove('bottom-to-top-animation');
-            void transitionBottom.offsetHeight;
-            transitionBottom.classList.add('bottom-to-top-animation');
-        }
-    }
+    navigationListener.notify(list.selectedIndex);
     lastNavListIndex = list.selectedIndex;
 });
-

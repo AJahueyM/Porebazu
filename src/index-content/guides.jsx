@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactMarkDown from 'react-markdown';
 import {makeHTTPRequestJSON} from '../common/html-request-handler.js';
 
 export class Guides extends React.Component {
@@ -11,35 +10,45 @@ export class Guides extends React.Component {
         };
     }
     componentDidMount() {
-        makeHTTPRequestJSON({method: 'POST', url: 'get-guides', body: {request: 'get_tree'}},(response) => this.getDescriptorsRequestCallback(response));
+        makeHTTPRequestJSON({method: 'POST', url: 'get-guides', body: {request: 'get_tree'}},(response) => this.getGuideTreeRequestCallback(response));
     }
-    getDescriptorsRequestCallback(response){
+    getGuideTreeRequestCallback(response){
         if(response === undefined){
             return;
         }
         let guidesTree = JSON.parse(response);
         this.setState({guidesTree: guidesTree});
     }
-    renderGuide(guide){
+
+    static renderGuide(guide){
+        let htmlREQ = "./guide.html?area=" + guide.area + "&level=" + guide.level + "&group=" + guide.group + "&name=" + guide.name;
         return (
-            <div>
-                <p>{guide.name}</p>
+            <div key={guide.name + '-list-id'}>
+                <a href={htmlREQ}>{guide.name}</a>
             </div>
         );
     }
-    renderGuideGroup(group){
+    static renderGuideGroup(group){
         return (
-            <div>
+            <div key={group.name + '-list-id'}>
                 <h3>{group.name}</h3>
-                {group.guides.map((guide) => renderGuide(guide))}
+                {group.guides.map((guide) => Guides.renderGuide(guide))}
             </div>
         );
     }
-    renderGuideLevel(level){
+    static renderGuideLevel(level){
         return(
-            <div>
+            <div key={level.name + '-list-id'}>
                 <h2>{level.name}</h2>
-                {level.groups.map((group) => renderGuideGroup(group))}
+                {level.groups.map((group) => Guides.renderGuideGroup(group))}
+            </div>
+        );
+    }
+    static renderGuideArea(area){
+        return(
+            <div key={area.name + '-list-id'}>
+                <h1>{area.name}</h1>
+                {area.levels.map((level) => Guides.renderGuideLevel(level))}
             </div>
         );
     }
@@ -53,27 +62,8 @@ export class Guides extends React.Component {
                 <ul className='guides-list'>
                     <h3>
                     </h3>
-                    {this.guidesTree.map((level) => renderGuideLevel(level))}
+                    {this.state.guidesTree.map((area) => Guides.renderGuideArea(area))}
                 </ul>
-            </div>
-        );
-    }
-
-}
-
-class GuideDescriptor extends React.Component {
-    constructor(props){
-        super(props);
-        this.state= {
-          descriptor: props.descriptor
-        };
-    }
-    render() {
-        return(
-            <div className='guide-descriptor'>
-                <h3 className='guide-descriptor-name'>
-                    {this.state.descriptor.name}
-                </h3>
             </div>
         );
     }
