@@ -11,13 +11,37 @@ export class Guides extends React.Component {
         };
     }
     componentDidMount() {
-        makeHTTPRequestJSON({method: 'POST', url: 'get-guides', body: {request: 'get_descriptors'}},(response) => this.getDescriptorsRequestCallback(response));
+        makeHTTPRequestJSON({method: 'POST', url: 'get-guides', body: {request: 'get_tree'}},(response) => this.getDescriptorsRequestCallback(response));
     }
     getDescriptorsRequestCallback(response){
         if(response === undefined){
             return;
         }
-        this.setState({guidesTree: JSON.parse(response)});
+        let guidesTree = JSON.parse(response);
+        this.setState({guidesTree: guidesTree});
+    }
+    renderGuide(guide){
+        return (
+            <div>
+                <p>{guide.name}</p>
+            </div>
+        );
+    }
+    renderGuideGroup(group){
+        return (
+            <div>
+                <h3>{group.name}</h3>
+                {group.guides.map((guide) => renderGuide(guide))}
+            </div>
+        );
+    }
+    renderGuideLevel(level){
+        return(
+            <div>
+                <h2>{level.name}</h2>
+                {level.groups.map((group) => renderGuideGroup(group))}
+            </div>
+        );
     }
 
     render() {
@@ -28,9 +52,8 @@ export class Guides extends React.Component {
                 </h1>
                 <ul className='guides-list'>
                     <h3>
-                        {this.state.guidesTree.map((level) => this.renderLevelGuideIndex(level))}
                     </h3>
-                    {}
+                    {this.guidesTree.map((level) => renderGuideLevel(level))}
                 </ul>
             </div>
         );

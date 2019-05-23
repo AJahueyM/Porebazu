@@ -45,7 +45,7 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
         });
         return guidesDescriptors;
     }
-    onGuidesUpdated() {
+    onGuidesUpdated(change, path) {
        let currentGuides =  this.getCurrentGuidesDescriptors().slice();
        let newGuideTree = [];
        currentGuides.forEach((item) => {
@@ -61,21 +61,19 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
                 levelIndex = newGuideTree.length - 1;
             }
 
-            let groupIndex =  newGuideTree[levelIndex].groups.indexOf((group) => {
+            let groupIndex =  newGuideTree[levelIndex].groups.findIndex((group) => {
                 return group.name === item.group;
             });
 
             if(groupIndex === -1){
                 let newGroup = {};
-                newGroup.name = item.name;
+                newGroup.name = item.group;
                 newGroup.guides = [];
                 newGuideTree[levelIndex].groups.push(newGroup);
                 groupIndex = newGuideTree[levelIndex].groups.length - 1;
             }
             newGuideTree[levelIndex].groups[groupIndex].guides.push(item);
        });
-       console.log('--------------------');
-       console.log(newGuideTree);
        this.guideTree = newGuideTree;
     }
     getGuideTree(){
