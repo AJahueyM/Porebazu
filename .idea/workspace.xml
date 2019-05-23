@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c5c7621-8e18-4074-991f-906e7e904bf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/bundle-index.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/bundle-index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/bundle-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/bundle-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guides/Programación/1. Principiante/1. Primeros Programas en C++/1. Instalar un compilador.md" beforeDir="false" afterPath="$PROJECT_DIR$/guides/Programación/1. Principiante/1. Primeros Programas en C++/1. Instalar un compilador.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/actions/get-guides.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/actions/get-guides.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/guide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/guide.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index-content/guides.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index-content/guides.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stylesheets/_common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheets/_common.scss" afterDir="false" />
-    </list>
+    <list default="true" id="1c5c7621-8e18-4074-991f-906e7e904bf6" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/guide.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="161">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -55,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index-content/guides.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="24" selection-end-column="63" />
+            <state relative-caret-position="115">
+              <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -73,20 +62,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/guide.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+            <state relative-caret-position="257">
+              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+            <state relative-caret-position="856">
+              <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -112,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
+            <state relative-caret-position="64">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -195,15 +184,15 @@
         <option value="$PROJECT_DIR$/guides/Programación/1. Principiante/1. Primeros Programas en C++/2. El típico &quot;Hello World&quot;.md" />
         <option value="$PROJECT_DIR$/guides/Programación/1. Principiante/1. Primeros Programas en C++/3. Variables.md" />
         <option value="$PROJECT_DIR$/guides/Programación/1. Principiante/1. Primeros Programas en C++/4. Condiciones.md" />
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/stylesheets/_common.scss" />
         <option value="$PROJECT_DIR$/guides/Programación/1. Principiante/1. Primeros Programas en C++/1. Instalar un compilador.md" />
         <option value="$PROJECT_DIR$/src/index-content/guides.jsx" />
         <option value="$PROJECT_DIR$/server/actions/get-guides.js" />
         <option value="$PROJECT_DIR$/dist/index.html" />
-        <option value="$PROJECT_DIR$/dist/guide.html" />
-        <option value="$PROJECT_DIR$/src/guide.jsx" />
         <option value="$PROJECT_DIR$/server/server.js" />
+        <option value="$PROJECT_DIR$/src/guide.jsx" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/dist/guide.html" />
       </list>
     </option>
   </component>
@@ -251,6 +240,11 @@
               <item name="Programación" type="462c0819:PsiDirectoryNode" />
               <item name="1. Principiante" type="462c0819:PsiDirectoryNode" />
               <item name="1. Primeros Programas en C++" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Porebazu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Porebazu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -357,12 +351,12 @@
       <workItem from="1558301936993" duration="16456000" />
       <workItem from="1558381228017" duration="2006000" />
       <workItem from="1558549207053" duration="8181000" />
-      <workItem from="1558574176730" duration="14271000" />
+      <workItem from="1558574176730" duration="14674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150242000" />
+    <option name="totallyTimeSpent" value="150645000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -379,10 +373,10 @@
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.2544" side_tool="true" weight="0.32366896" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.7456" visible="true" weight="0.32366896" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.7456" visible="true" weight="0.32366896" />
       <window_info id="Structure" order="3" sideWeight="0.3848684" side_tool="true" weight="0.32366896" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="1" sideWeight="0.49920928" visible="true" weight="0.30165747" />
+      <window_info anchor="bottom" id="Run Dashboard" order="1" sideWeight="0.49920928" visible="true" weight="0.30165747" />
       <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49973643" weight="0.3281768" />
       <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.5007907" side_tool="true" weight="0.36685082" />
       <window_info anchor="bottom" id="Version Control" order="4" />
@@ -695,16 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -729,33 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/guide.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/guide.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index-content/guides.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="24" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/actions/get-guides.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -765,8 +722,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+        <state relative-caret-position="856">
+          <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index-content/guides.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/guide.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/guide.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
         </state>
       </provider>
     </entry>
