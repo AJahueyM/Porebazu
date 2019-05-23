@@ -3,10 +3,11 @@ const path_module = require('path');
 
 exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
     constructor() {
-        super('guides/*/*/*/*.md', (data, path) => GuidesManager.parseGuide(data, path), (update, path) => this.onGuidesUpdated(update, path));
+        super('guides/*/*/*/*.md', (data, path) => this.parseGuide(data, path), (update, path) => this.onGuidesUpdated(update, path));
         this.guideTree = [];
+        this.currentGuides = 0;
     }
-    static parseGuide(data, path){
+    parseGuide(data, path){
         let guide =  {};
         guide.md = data;
         let baseName =  path_module.basename(path);
@@ -18,6 +19,8 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
         guide.area = pathBreakup[1];
         guide.level = pathBreakup[2];
         guide.group = pathBreakup[3];
+        guide.id = this.currentGuides;
+        this.currentGuides = this.currentGuides + 1;
         return guide;
     }
     getCurrentGuides(){
@@ -26,6 +29,11 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
     getGuide(level, group, name){
         return this.getCurrentGuides().find((item) => {
            return item.name === name;
+        });
+    }
+    getGuideByID(id){
+        return this.getCurrentGuides().find((item) => {
+            return item.id === id;
         });
     }
     getCurrentGuidesNames() {
@@ -38,11 +46,8 @@ exports.GuidesManager= class GuidesManager extends fileNotifier.FileNotifier{
     getCurrentGuidesDescriptors() {
         let guidesDescriptors = [];
         this._getParsedFiles().forEach((item) => {
-            let descriptor = {};
-            descriptor.name = item.name;
-            descriptor.level = item.level;
-            descriptor.group = item.group;
-            descriptor.area = item.area;
+            let descriptor = item;
+            descriptor.data = undefined;
             guidesDescriptors.push(descriptor);
         });
         return guidesDescriptors;

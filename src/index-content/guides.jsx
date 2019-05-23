@@ -21,7 +21,8 @@ export class Guides extends React.Component {
     }
 
     static renderGuide(guide){
-        let htmlREQ = "./guide.html?area=" + guide.area + "&level=" + guide.level + "&group=" + guide.group + "&name=" + guide.name;
+        let queryName = guide.name.replace(/ /g, '-').substr(guide.name.search(/[a-zA-Z]/));
+        let htmlREQ = "./guides/" + guide.id + '/' + queryName;
         return (
             <div key={guide.name + '-list-id'}>
                 <a href={htmlREQ}>{guide.name}</a>

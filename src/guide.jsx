@@ -3,13 +3,7 @@ import ReactDOM from "react-dom";
 import ReactMarkDown from 'react-markdown';
 import {makeHTTPRequestJSON} from './common/html-request-handler.js';
 
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = decodeURI(value);
-    });
-    return vars;
-}
+
 class Guide extends React.Component{
     constructor(props){
         super(props);
@@ -18,28 +12,24 @@ class Guide extends React.Component{
         };
     }
     componentDidMount() {
-        let guideInfo = getUrlVars();
+        let guideID = window.location.href.split('/')[4];
+        guideID = parseInt(guideID);
         this.getGuideRequest({
-            area: guideInfo.area,
-            level: guideInfo.level,
-            group: guideInfo.group,
-            name: guideInfo.name
+            id: guideID
         });
     }
     getGuideRequest(guide){
         let params = {
             method: 'POST',
-            url: 'get-guides',
+            url: '/get-guides',
             body: {
                 request: 'get_guide',
-                guide_area: guide.area,
-                guide_level: guide.level,
-                guide_group: guide.group,
-                guide_name: guide.name
+                guide_id: guide.id
             }};
         makeHTTPRequestJSON(params,(response) => this.getGuideRequestCallback(response));
     }
     getGuideRequestCallback(response) {
+
         if(response === undefined){
             return;
         }

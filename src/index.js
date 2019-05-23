@@ -20,9 +20,14 @@ let lastNavListIndex = 0;
 
 let url = window.location.hash, idx = url.indexOf("#");
 let hash = idx !== -1 ? url.substring(idx+1) : "";
-console.log(hash);
 
 switch (hash) {
+    case 'Home':
+    {
+        navigationListener.notify(0);
+        list.selectedIndex = 0;
+        break;
+    }
     case 'Guides':
     {
         navigationListener.notify(1);
@@ -40,6 +45,7 @@ switch (hash) {
         break;
     }
 }
+lastNavListIndex = list.selectedIndex;
 list.listen('click', () => {
     let movementList = list.selectedIndex - lastNavListIndex;
     if(movementList === 0){
