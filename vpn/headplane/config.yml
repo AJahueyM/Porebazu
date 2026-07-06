@@ -14,8 +14,6 @@ server:
   # See https://headplane.net/configuration/#sensitive-values
   cookie_secret_path: "/var/lib/headplane/cookie_secret"
 
-  api_key_path: "/var/lib/headplane/api_key"
-
   # Whether cookies should be marked as Secure
   # * Should be false if running without HTTPs
   # * Should be true if running behind a reverse proxy with HTTPs
@@ -118,11 +116,13 @@ headscale:
   # in the Web UI, but they cannot be changed.
   config_path: "/etc/headscale/config.yaml"
 
+
   # The API key used by Headplane for server-side operations.
   # This is required for OIDC authentication, proxy authentication, and the
   # Headplane agent.
   # Generate one with: headscale apikeys create
   # api_key: "<your-api-key>"
+  api_key_path: "/var/lib/headplane/api_key"
 
   # If you are using `dns.extra_records_path` in your Headscale
   # configuration, Headplane will read that path automatically. Set
