@@ -5,5 +5,4 @@ param locations = [
   'mexicocentral'
 ]
 
-param storageLocation = locations[0]
-param headscaleVersion = 'latest'
+param adminPublicKey = ''

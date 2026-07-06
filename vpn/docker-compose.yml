@@ -1,42 +1,71 @@
 services:
+  # Same as before
   headplane:
     image: ghcr.io/tale/headplane:latest
     container_name: headplane
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     volumes:
-      # Same as before
-      - "headplane/config.yaml:/etc/headplane/config.yaml"
-      - "headplane/data:/var/lib/headplane"
-
-      # A shared path to the Headscale config file. It is important that the
-      # path you mount this on matches `headscale.config_path` in your
-      # Headplane config.yaml file.
-      - "headscale/config.yaml:/etc/headscale/config.yaml"
-
-      # If you are using dns.extra_records in Headscale (recommended), you
-      # should also mount that file here so Headplane can read and write it.
-      # Ensure that the path matches `headscale.dns_records_path` in your
-      # Headplane config.yaml file.
-      - "headscale/dns_records.json:/etc/headscale/dns_records.json"
-
-      # Read-only access to the Docker socket (or a proxy)
+      - "./headplane/config.yaml:/etc/headplane/config.yaml"
+      - "./headplane/data:/var/lib/headplane"
+      - "./headscale/config.yaml:/etc/headscale/config.yaml"
+      - "./headscale/dns_records.json:/etc/headscale/dns_records.json"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      # Expose the admin UI at /admin
+      - "traefik.enable=true"
+      - "traefik.http.routers.headplane.rule=Host(`headscale.porebazu.com`) && PathPrefix(`/admin`)"
+      - "traefik.http.routers.headplane.entrypoints=websecure"
+      - "traefik.http.routers.headplane.tls=true"
+      - "traefik.http.routers.headplane.tls.certresolver=letsencrypt"
+      - "traefik.http.services.headplane.loadbalancer.server.port=3000"
   headscale:
-    image: headscale/headscale:0.26.0
+    image: headscale/headscale:latest
     container_name: headscale
     restart: unless-stopped
     command: serve
-    labels:
-      # This label is absolutely necessary to help Headplane find Headscale.
-      me.tale.headplane.target: headscale
-    ports:
-      - "8080:8080"
     volumes:
-      # Notice how these are on the exact same path as the host for both
-      # Headscale and Headplane! This is very important.
-      - "headscale/config.yaml:/etc/headscale/config.yaml"
-      - "headscale/dns_records.json:/etc/headscale/dns_records.json"
+      - "./headscale/config.yaml:/etc/headscale/config.yaml"
+      - "./headscale/dns_records.json:/etc/headscale/dns_records.json"
+      - "./headscale/data:/var/lib/headscale"
+    labels:
+      - "me.tale.headplane.target=headscale"
 
-      - "headscale/data:/var/lib/headscale"
+      # Traefik labels to expose Headscale at headscale.porebazu.com
+      - "traefik.enable=true"
+      - "traefik.http.routers.headscale.rule=Host(`headscale.porebazu.com`)"
+      - "traefik.http.routers.headscale.entrypoints=websecure"
+      - "traefik.http.routers.headscale.tls=true"
+      - "traefik.http.routers.headscale.tls.certresolver=letsencrypt"
+      - "traefik.http.services.headscale.loadbalancer.server.port=8080"
+
+      # This middleware is essential to ensuring Headplane works correctly
+      - "traefik.http.routers.headscale.middlewares=cors"
+      - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*"
+      - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET,POST,PUT"
+      - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=https://headscale.porebazu.com"
+      - "traefik.http.middlewares.cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.cors.headers.addvaryheader=true"
+
+      # If you would optionally like to automatically redirect / to /admin
+      - "traefik.http.routers.rewrite.rule=Host(`headscale.porebazu.com`) && Path(`/`)"
+      - "traefik.http.routers.rewrite.entrypoints=websecure"
+      - "traefik.http.routers.rewrite.tls=true"
+      - "traefik.http.routers.rewrite.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.rewrite.service=headscale"
+      - "traefik.http.routers.rewrite.middlewares=rewrite"
+      - "traefik.http.middlewares.rewrite.addprefix.prefix=/admin"
+
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "traefik-certs:/certs"
+
+volumes:
+  traefik-certs:
