@@ -102,9 +102,9 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = {
     }
     storageProfile: {
       imageReference: {
-        publisher: 'Canonical'
-        offer: 'ubuntu-24_04-lts'
-        sku: 'server'
+        publisher: 'Debian'
+        offer: 'debian-13'
+        sku: '13'
         version: 'latest'
       }
       osDisk: {
