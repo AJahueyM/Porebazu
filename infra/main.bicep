@@ -42,7 +42,7 @@ module domain 'domain/domain.bicep' = {
     zoneName: 'porebazu.com'
     cNameRecordsConfig: [
       {
-        name: 'headscale'
+        name: 'vpn'
         properties: {
           TTL: 3600
           CNAMERecord: { cname: headscaleVm[0].outputs.fqdn }

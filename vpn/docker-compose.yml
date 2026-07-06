@@ -15,7 +15,7 @@ services:
     labels:
       # Expose the admin UI at /admin
       - "traefik.enable=true"
-      - "traefik.http.routers.headplane.rule=Host(`headscale.porebazu.com`) && PathPrefix(`/admin`)"
+      - "traefik.http.routers.headplane.rule=Host(`vpn.porebazu.com`) && PathPrefix(`/admin`)"
       - "traefik.http.routers.headplane.entrypoints=websecure"
       - "traefik.http.routers.headplane.tls=true"
       - "traefik.http.routers.headplane.tls.certresolver=letsencrypt"
@@ -65,9 +65,9 @@ services:
     labels:
       - "me.tale.headplane.target=headscale"
 
-      # Traefik labels to expose Headscale at headscale.porebazu.com
+      # Traefik labels to expose Headscale at vpn.porebazu.com
       - "traefik.enable=true"
-      - "traefik.http.routers.headscale.rule=Host(`headscale.porebazu.com`)"
+      - "traefik.http.routers.headscale.rule=Host(`vpn.porebazu.com`)"
       - "traefik.http.routers.headscale.entrypoints=websecure"
       - "traefik.http.routers.headscale.tls=true"
       - "traefik.http.routers.headscale.tls.certresolver=letsencrypt"
@@ -77,12 +77,12 @@ services:
       - "traefik.http.routers.headscale.middlewares=cors"
       - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*"
       - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET,POST,PUT"
-      - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=https://headscale.porebazu.com"
+      - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=https://vpn.porebazu.com"
       - "traefik.http.middlewares.cors.headers.accesscontrolmaxage=100"
       - "traefik.http.middlewares.cors.headers.addvaryheader=true"
 
       # If you would optionally like to automatically redirect / to /admin
-      - "traefik.http.routers.rewrite.rule=Host(`headscale.porebazu.com`) && Path(`/`)"
+      - "traefik.http.routers.rewrite.rule=Host(`vpn.porebazu.com`) && Path(`/`)"
       - "traefik.http.routers.rewrite.entrypoints=websecure"
       - "traefik.http.routers.rewrite.tls=true"
       - "traefik.http.routers.rewrite.tls.certresolver=letsencrypt"
