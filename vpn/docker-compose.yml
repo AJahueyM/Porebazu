@@ -40,7 +40,8 @@ services:
           echo "Failed to create API key"
           exit 1
         fi
-        sed -i "s/HEADPLANE_API_KEY/$$KEY/" /etc/headplane/config.yaml
+        sed "s/HEADPLANE_API_KEY/$$KEY/" /etc/headplane/config.yaml > /tmp/config.yaml
+        cat /tmp/config.yaml > /etc/headplane/config.yaml
         if [ ! -f /var/lib/headplane/cookie_secret ]; then
           openssl rand -base64 24 > /var/lib/headplane/cookie_secret
         fi
