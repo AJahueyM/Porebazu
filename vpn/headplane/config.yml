@@ -121,8 +121,7 @@ headscale:
   # This is required for OIDC authentication, proxy authentication, and the
   # Headplane agent.
   # Generate one with: headscale apikeys create
-  # api_key: "<your-api-key>"
-  api_key_path: "/var/lib/headplane/api_key"
+  api_key: "HEADPLANE_API_KEY"
 
   # If you are using `dns.extra_records_path` in your Headscale
   # configuration, Headplane will read that path automatically. Set
