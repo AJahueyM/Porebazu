@@ -237,16 +237,16 @@ database:
 # TLS for a domain with Let's Encrypt.
 
 # URL to ACME directory
-acme_url: https://acme-v02.api.letsencrypt.org/directory
+acme_url: ""
 
 # Email to register with ACME provider
-acme_email: "albertojahueymoncada@gmail.com"
+acme_email: ""
 
 # Domain name to request a TLS certificate for:
-tls_letsencrypt_hostname: "headscale.porebazu.com"
+tls_letsencrypt_hostname: ""
 
 # Path to store certificates and metadata needed by letsencrypt
-tls_letsencrypt_cache_dir: /var/lib/headscale/cache
+tls_letsencrypt_cache_dir: ""
 
 # Type of ACME challenge to use, currently supported types:
 # HTTP-01 or TLS-ALPN-01
