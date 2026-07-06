@@ -9,4 +9,4 @@ runcmd:
   - systemctl enable docker
   - systemctl start docker
   - git clone https://github.com/AJahueyM/Porebazu.git /opt/porebazu
-  - docker compose -f /opt/porebazu/vpn/docker-compose-tailscale.yml up -d
+  - docker compose --project-directory /opt/porebazu/vpn -f /opt/porebazu/vpn/docker-compose-tailscale.yml up -d

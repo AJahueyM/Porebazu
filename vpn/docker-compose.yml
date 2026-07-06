@@ -5,9 +5,9 @@ services:
     container_name: headplane
     restart: unless-stopped
     volumes:
-      - "/opt/porebazu/vpn/headplane/config.yaml:/etc/headplane/config.yaml"
+      - "/opt/porebazu/vpn/headplane/config.yml:/etc/headplane/config.yaml"
       - "/opt/porebazu/vpn/headplane/data:/var/lib/headplane"
-      - "/opt/porebazu/vpn/headscale/config.yaml:/etc/headscale/config.yaml"
+      - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
       - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
     command: serve
     volumes:
-      - "/opt/porebazu/vpn/headscale/config.yaml:/etc/headscale/config.yaml"
+      - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
       - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
       - "/opt/porebazu/vpn/headscale/data:/var/lib/headscale"
     labels:
