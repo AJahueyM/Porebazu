@@ -15,19 +15,6 @@ var tailscaleCloudInit = loadTextContent('cloud-init-tailscale.yml')
 
 var headscaleNsgRules = [
   {
-    name: 'Allow-SSH'
-    properties: {
-      priority: 1000
-      direction: 'Inbound'
-      access: 'Allow'
-      protocol: 'Tcp'
-      sourcePortRange: '*'
-      destinationPortRange: '22'
-      sourceAddressPrefix: '*'
-      destinationAddressPrefix: '*'
-    }
-  }
-  {
     name: 'Allow-HTTPS'
     properties: {
       priority: 1010
@@ -54,32 +41,6 @@ var headscaleNsgRules = [
     }
   }
   {
-    name: 'Allow-Headscale'
-    properties: {
-      priority: 1030
-      direction: 'Inbound'
-      access: 'Allow'
-      protocol: 'Tcp'
-      sourcePortRange: '*'
-      destinationPortRange: '8080'
-      sourceAddressPrefix: '*'
-      destinationAddressPrefix: '*'
-    }
-  }
-  {
-    name: 'Allow-Headplane'
-    properties: {
-      priority: 1040
-      direction: 'Inbound'
-      access: 'Allow'
-      protocol: 'Tcp'
-      sourcePortRange: '*'
-      destinationPortRange: '3000'
-      sourceAddressPrefix: '*'
-      destinationAddressPrefix: '*'
-    }
-  }
-  {
     name: 'Allow-Tailscale-UDP'
     properties: {
       priority: 1050
@@ -95,19 +56,6 @@ var headscaleNsgRules = [
 ]
 
 var tailscaleNsgRules = [
-  {
-    name: 'Allow-SSH'
-    properties: {
-      priority: 1000
-      direction: 'Inbound'
-      access: 'Allow'
-      protocol: 'Tcp'
-      sourcePortRange: '*'
-      destinationPortRange: '22'
-      sourceAddressPrefix: '*'
-      destinationAddressPrefix: '*'
-    }
-  }
   {
     name: 'Allow-Tailscale-UDP'
     properties: {

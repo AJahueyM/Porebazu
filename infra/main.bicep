@@ -48,6 +48,13 @@ module domain 'domain/domain.bicep' = {
           CNAMERecord: { cname: headscaleVm[0].outputs.fqdn }
         }
       }
+      {
+        name: 'dns'
+        properties: {
+          TTL: 3600
+          CNAMERecord: { cname: headscaleVm[0].outputs.fqdn }
+        }
+      }
     ]
   }
 }
