@@ -2,11 +2,11 @@
 package_update: true
 packages:
   - docker.io
-  - docker-compose
+  - docker-compose-v2
   - git
 
 runcmd:
   - systemctl enable docker
   - systemctl start docker
   - git clone https://github.com/AJahueyM/Porebazu.git /opt/porebazu
-  - cd /opt/porebazu/vpn && docker compose -f docker-compose-tailscale.yml up -d
+  - docker compose -f /opt/porebazu/vpn/docker-compose-tailscale.yml up -d

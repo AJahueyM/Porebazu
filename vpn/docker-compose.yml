@@ -5,10 +5,10 @@ services:
     container_name: headplane
     restart: unless-stopped
     volumes:
-      - "./headplane/config.yaml:/etc/headplane/config.yaml"
-      - "./headplane/data:/var/lib/headplane"
-      - "./headscale/config.yaml:/etc/headscale/config.yaml"
-      - "./headscale/dns_records.json:/etc/headscale/dns_records.json"
+      - "/opt/porebazu/vpn/headplane/config.yaml:/etc/headplane/config.yaml"
+      - "/opt/porebazu/vpn/headplane/data:/var/lib/headplane"
+      - "/opt/porebazu/vpn/headscale/config.yaml:/etc/headscale/config.yaml"
+      - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       # Expose the admin UI at /admin
@@ -24,9 +24,9 @@ services:
     restart: unless-stopped
     command: serve
     volumes:
-      - "./headscale/config.yaml:/etc/headscale/config.yaml"
-      - "./headscale/dns_records.json:/etc/headscale/dns_records.json"
-      - "./headscale/data:/var/lib/headscale"
+      - "/opt/porebazu/vpn/headscale/config.yaml:/etc/headscale/config.yaml"
+      - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
+      - "/opt/porebazu/vpn/headscale/data:/var/lib/headscale"
     labels:
       - "me.tale.headplane.target=headscale"
 
@@ -56,7 +56,7 @@ services:
       - "traefik.http.middlewares.rewrite.addprefix.prefix=/admin"
 
   traefik:
-    image: traefik:v3.0
+    image: traefik:latest
     container_name: traefik
     restart: unless-stopped
     ports:
