@@ -9,6 +9,7 @@ services:
       - "/opt/porebazu/vpn/headplane/data:/var/lib/headplane"
       - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
       - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
+      - "/opt/porebazu/vpn/headplane/cookie_secret:/var/lib/headplane/cookie_secret:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       # Expose the admin UI at /admin
