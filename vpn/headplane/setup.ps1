@@ -1,0 +1,1 @@
+openssl rand -base64 24 >> data/cookie_secret
