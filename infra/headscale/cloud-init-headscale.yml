@@ -9,5 +9,4 @@ runcmd:
   - systemctl enable docker
   - systemctl start docker
   - git clone https://github.com/AJahueyM/Porebazu.git /opt/porebazu
-  - openssl rand -base64 24 >> /opt/porebazu/vpn/headplane/cookie_secret
   - docker compose --project-directory /opt/porebazu/vpn -f /opt/porebazu/vpn/docker-compose.yml up -d

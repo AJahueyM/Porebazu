@@ -14,6 +14,8 @@ server:
   # See https://headplane.net/configuration/#sensitive-values
   cookie_secret_path: "/var/lib/headplane/cookie_secret"
 
+  api_key_path: "/var/lib/headplane/api_key"
+
   # Whether cookies should be marked as Secure
   # * Should be false if running without HTTPs
   # * Should be true if running behind a reverse proxy with HTTPs

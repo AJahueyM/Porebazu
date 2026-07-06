@@ -1,15 +1,16 @@
 services:
-  # Same as before
   headplane:
     image: ghcr.io/tale/headplane:latest
     container_name: headplane
     restart: unless-stopped
+    depends_on:
+      headplane-init:
+        condition: service_completed_successfully
     volumes:
       - "/opt/porebazu/vpn/headplane/config.yml:/etc/headplane/config.yaml"
-      - "/opt/porebazu/vpn/headplane/data:/var/lib/headplane"
+      - "headplane-data:/var/lib/headplane"
       - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
       - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
-      - "/opt/porebazu/vpn/headplane/cookie_secret:/var/lib/headplane/cookie_secret:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       # Expose the admin UI at /admin
@@ -19,11 +20,44 @@ services:
       - "traefik.http.routers.headplane.tls=true"
       - "traefik.http.routers.headplane.tls.certresolver=letsencrypt"
       - "traefik.http.services.headplane.loadbalancer.server.port=3000"
+
+  headplane-init:
+    image: headscale/headscale:latest
+    container_name: headplane-init
+    depends_on:
+      headscale:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        if [ -f /var/lib/headplane/api_key ]; then
+          echo "API key already exists, skipping creation"
+          exit 0
+        fi
+        KEY=$$(headscale apikeys create -o json --expiration 9999d 2>/dev/null | tr -d '"')
+        if [ -z "$$KEY" ]; then
+          echo "Failed to create API key"
+          exit 1
+        fi
+        echo -n "$$KEY" > /var/lib/headplane/api_key
+        openssl rand -base64 24 > /var/lib/headplane/cookie_secret
+        echo "API key and cookie secret created successfully"
+    volumes:
+      - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
+      - "/opt/porebazu/vpn/headscale/data:/var/lib/headscale"
+      - "headplane-data:/var/lib/headplane"
+
   headscale:
     image: headscale/headscale:latest
     container_name: headscale
     restart: unless-stopped
     command: serve
+    healthcheck:
+      test: ["CMD", "headscale", "health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     volumes:
       - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
       - "/opt/porebazu/vpn/headscale/dns_records.json:/etc/headscale/dns_records.json"
@@ -70,3 +104,4 @@ services:
 
 volumes:
   traefik-certs:
+  headplane-data:
