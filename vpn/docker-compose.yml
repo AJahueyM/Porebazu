@@ -106,6 +106,22 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "traefik-certs:/certs"
 
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--login-server=https://vpn.porebazu.com --advertise-exit-node
+      - TS_USERSPACE=false
+    volumes:
+      - tailscale-data:/var/lib/tailscale
+
 volumes:
   traefik-certs:
   headplane-data:
+  tailscale-data:
