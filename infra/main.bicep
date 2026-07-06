@@ -5,7 +5,7 @@ import { getRegionShortHand } from './params/shorthand.bicep'
 param locations string[]
 
 param headscaleLocation string = locations[0]
-param vmSize string = 'Standard_B1s'
+param vmSize string = 'Standard_B1ls'
 
 @secure()
 param adminPublicKey string

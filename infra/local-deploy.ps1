@@ -9,7 +9,7 @@ if (-not (Test-Path $sshKeyPath)) {
     exit 1
 }
 
-sshPublicKey = Get-Content $sshKeyPath -Raw
+$sshPublicKey = Get-Content $sshKeyPath -Raw
 
 az deployment sub create --name "infra-deploy" --location "$deployLocation" --template-file "main.bicep" --parameters "params/$env.bicepparam" --parameters adminPublicKey="$sshPublicKey"
 
