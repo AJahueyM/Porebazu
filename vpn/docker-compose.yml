@@ -22,7 +22,7 @@ services:
       - "traefik.http.services.headplane.loadbalancer.server.port=3000"
 
   headplane-init:
-    image: headscale/headscale:latest
+    image: alpine:latest
     container_name: headplane-init
     depends_on:
       headscale:
@@ -34,7 +34,8 @@ services:
           echo "API key already exists, skipping creation"
           exit 0
         fi
-        KEY=$$(headscale apikeys create -o json --expiration 9999d 2>/dev/null | tr -d '"')
+        apk add --no-cache openssl docker-cli
+        KEY=$$(docker exec headscale headscale apikeys create -o json --expiration 9999d 2>/dev/null | tr -d '"')
         if [ -z "$$KEY" ]; then
           echo "Failed to create API key"
           exit 1
@@ -43,8 +44,7 @@ services:
         openssl rand -base64 24 > /var/lib/headplane/cookie_secret
         echo "API key and cookie secret created successfully"
     volumes:
-      - "/opt/porebazu/vpn/headscale/config.yml:/etc/headscale/config.yaml"
-      - "/opt/porebazu/vpn/headscale/data:/var/lib/headscale"
+      - "/var/run/docker.sock:/var/run/docker.sock"
       - "headplane-data:/var/lib/headplane"
 
   headscale:
