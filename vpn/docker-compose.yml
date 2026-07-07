@@ -142,8 +142,6 @@ services:
       - "traefik.http.routers.adguard.tls=true"
       - "traefik.http.routers.adguard.tls.certresolver=letsencrypt"
       - "traefik.http.services.adguard.loadbalancer.server.port=3000"
-      - "traefik.http.routers.adguard.middlewares=vpn-only"
-      - "traefik.http.middlewares.vpn-only.ipallowlist.sourcerange=100.64.0.0/10"
 
 volumes:
   traefik-certs:
