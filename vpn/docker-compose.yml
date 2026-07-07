@@ -144,6 +144,7 @@ services:
       - "traefik.http.routers.adguard.entrypoints=websecure"
       - "traefik.http.routers.adguard.tls=true"
       - "traefik.http.routers.adguard.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.rewrite.service=adguard"
       - "traefik.http.services.adguard.loadbalancer.server.port=3000"
 
 
