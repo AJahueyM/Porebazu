@@ -134,7 +134,6 @@ services:
     volumes:
       - adguard-work:/opt/adguardhome/work
       - adguard-conf:/opt/adguardhome/conf
-      - "/opt/porebazu/vpn/adguard/AdGuardHome.yaml:/opt/adguardhome/conf/AdGuardHome.yaml"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adguard.rule=Host(`dns.porebazu.com`)"
