@@ -16,6 +16,8 @@ runcmd:
   - sysctl -w net.ipv6.conf.all.forwarding=1
   - echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.d/99-tailscale.conf
   - echo 'net.ipv6.conf.all.forwarding=1' >> /etc/sysctl.d/99-tailscale.conf
+  - iptables -t nat -A POSTROUTING -s 100.64.0.0/10 -o eth0 -j MASQUERADE
+  - ip6tables -t nat -A POSTROUTING -s fd7a:115c:a1e0::/48 -o eth0 -j MASQUERADE
   - systemctl enable docker
   - systemctl start docker
   - systemctl disable --now systemd-resolved
