@@ -135,6 +135,7 @@ services:
       - adguard-work:/opt/adguardhome/work
       - adguard-conf:/opt/adguardhome/conf
     labels:
+    # During first setup, you will need to change the port to 3000 instead of 8080. Once that is done, you need to update the config file so the web ui is served on port 8080. This is because Traefik will be routing to port 8080, while the default is 80.
       - "traefik.enable=true"
       - "traefik.http.routers.adguard.rule=Host(`dns.porebazu.com`)"
       - "traefik.http.routers.adguard.entrypoints=websecure"
