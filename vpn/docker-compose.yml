@@ -145,6 +145,7 @@ services:
       - "traefik.http.routers.adguard-setup.tls=true"
       - "traefik.http.routers.adguard-setup.tls.certresolver=letsencrypt"
       - "traefik.http.routers.adguard-setup.service=adguard"
+      - "traefik.http.routers.adguard-setup.middlewares=rewrite"
       - "traefik.http.services.adguard.loadbalancer.server.port=3000"
 
 
